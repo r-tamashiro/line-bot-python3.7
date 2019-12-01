@@ -1,0 +1,17 @@
+steps:
+- id: 'pip install'
+  name: "docker.io/library/python:$_TAG"
+  args: ['pip', 'install', '-t', '/workspace/lib', '-r', '/workspace/requirements.txt']
+- id: "LINE Messaging API ACCESS_TOKEN 置換"
+  name: 'ubuntu'
+  entrypoint: 'bash'
+  args: ['-c', 'sed -i -e s#__ACCESS_TOKEN__#$_ACCESS_TOKEN# app.yaml']
+- id: "LINE Messaging API SECRET_TOKEN 置換"
+  name: 'ubuntu'
+  entrypoint: 'bash'
+  args: ['-c', 'sed -i -e s#__SECRET_TOKEN__#$_SECRET_TOKEN# app.yaml']
+- id: 'AppEngineへデプロイ'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['beta', 'app', 'deploy', 'app.yaml', "--no-cache"]
+substitutions:
+  _TAG: '3.7'

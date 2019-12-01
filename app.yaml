@@ -1,0 +1,21 @@
+runtime: python37
+service: line-bot-python
+
+handlers:
+
+- url: /.*
+  secure: always
+  script: auto
+
+automatic_scaling:
+  min_idle_instances: automatic
+  max_idle_instances: 1
+  min_pending_latency: 3000ms
+  max_pending_latency: automatic
+
+env_variables:
+  APP_DEBUG: true
+  APP_TIMEZONE: Asia/tokyo
+  LOG_CHANNEL: syslog
+  CHANNEL_SECRET: __LINE_CHANNEL_SECRET__
+  CHANNEL_TOKEN: __LINE_CHANNEL_TOKEN__

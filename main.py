@@ -33,12 +33,12 @@ app = Flask(__name__)
 
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv('CHANNEL_SECRET', None)
-channel_access_token = os.getenv('CHANNEL_TOKEN', None)
+channel_access_token = os.getenv('ACCESS_TOKEN', None)
 if channel_secret is None:
     print('Specify CHANNEL_SECRET as environment variable.')
     sys.exit(1)
 if channel_access_token is None:
-    print('Specify CHANNEL_TOKEN as environment variable.')
+    print('Specify ACCESS_TOKEN as environment variable.')
     sys.exit(1)
 
 line_bot_api = LineBotApi(channel_access_token)

@@ -9,7 +9,7 @@ steps:
 - id: "LINE Messaging API SECRET_TOKEN 置換"
   name: 'ubuntu'
   entrypoint: 'bash'
-  args: ['-c', 'sed -i -e s#__SECRET_TOKEN__#$_SECRET_TOKEN# app.yaml']
+  args: ['-c', 'sed -i -e s#__CHANNEL_SECRET__#$_CHANNEL_SECRET# app.yaml']
 - id: 'AppEngineへデプロイ'
   name: 'gcr.io/cloud-builders/gcloud'
   args: ['beta', 'app', 'deploy', 'app.yaml', "--no-cache"]
